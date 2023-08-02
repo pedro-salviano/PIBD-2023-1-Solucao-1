@@ -1,4 +1,4 @@
-CREATE TABLE Endereco_Parceiro(
+CREATE TABLE IF NOT EXISTS Endereco_Parceiro(
     Id SERIAL PRIMARY KEY,
 	Codigo_postal VARCHAR(50) NOT NULL,
 	Pais VARCHAR(50) NOT NULL,
