@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Edital(
 	Id SERIAL PRIMARY KEY, 	
-	Link VARCHAR(300),
+	Link TEXT,
 	Tipo VARCHAR(50),
 	Titulo VARCHAR(50),
 	Data_Inicial DATE,
