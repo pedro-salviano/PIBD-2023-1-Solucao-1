@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS Edital(
+	Id SERIAL PRIMARY KEY, 	
+	Link VARCHAR(300),
+	Tipo VARCHAR(50),
+	Titulo VARCHAR(50),
+	Data_Inicial TIMESTAMP,
+	Data_Final TIMESTAMP,
+	Gestor_Andifes_Isf_Id INTEGER
+);
