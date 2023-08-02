@@ -1,1 +1,2 @@
 ALTER TABLE andifes.IES_Nao_Credenciada
+  ADD CONSTRAINT REFERENCES IES(Sigla);
