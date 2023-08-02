@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS Edital(
 	Link VARCHAR(300),
 	Tipo VARCHAR(50),
 	Titulo VARCHAR(50),
-	Data_Inicial TIMESTAMP,
-	Data_Final TIMESTAMP,
+	Data_Inicial DATE,
+	Data_Final DATE,
 );
