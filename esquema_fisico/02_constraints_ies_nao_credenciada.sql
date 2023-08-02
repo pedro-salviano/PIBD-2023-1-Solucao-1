@@ -1,1 +1,0 @@
-ALTER TABLE andifes.ies_nao_credenciada
