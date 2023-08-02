@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS andifes.reitoria (
+    IES_Sigla varchar(10) PRIMARY KEY,
     Inicio_Periodo date PRIMARY KEY,
     Final_Periodo date,
     Email varchar(30),
