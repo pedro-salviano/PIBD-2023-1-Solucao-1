@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS andifes.IES_Credenciada(
+    IES_Sigla VARCHAR(50) PRIMARY KEY,
+    N_Esp_Cred INTEGER
+);
