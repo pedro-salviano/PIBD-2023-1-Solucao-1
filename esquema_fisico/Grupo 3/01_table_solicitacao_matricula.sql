@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS andifes.solicitacao_matricula(
+CREATE TABLE IF NOT EXISTS solicitacao_matricula(
     id SERIAL PRIMARY KEY,
     identidade INTEGER not null, 
     codigo VARCHAR (10) not null,

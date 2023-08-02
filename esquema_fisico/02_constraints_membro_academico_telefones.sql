@@ -1,5 +1,6 @@
-ALTER TABLE andifes.membro_academico_telefones
-ADD CONSTRAINT membro_academico_identidade FOREIGN KEY (identidade) REFERENCES membro_academico (identidade);
+ALTER TABLE membro_academico_telefones
+    ADD CONSTRAINT FK_membro_academico_identidade_genero FOREIGN KEY (identidade) REFERENCES membro_academico (identidade);
 
-ALTER TABLE andifes.membro_academico_telefones
-ADD CONSTRAINT PK_membro_academico_telefones PRIMARY KEY (membro_academico_identidade, ddd, ddi, numero);
+ALTER TABLE membro_academico_telefones
+    ADD CONSTRAINT FK_membro_academico_surrogate_genero FOREIGN KEY (id_membro_academico) REFERENCES membro_academico (id_membro_academico);
+

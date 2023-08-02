@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS andifes.curso_para_oferta(
+CREATE TABLE IF NOT EXISTS curso_para_oferta(
  codigo varchar(50) PRIMARY KEY,
  nome_completo varchar(100),
  nivel varchar(10),
@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS andifes.curso_para_oferta(
  idioma varchar(15),
  carga_horaria INTEGER,
  link_ementa text,
---  /*coord_pedago_curso INTEGER
---  checar o tipo de dado de identidade na tabela coordenador_pedago*/ 
-
+ /*coord_pedago_curso INTEGER
+  checar o tipo de dado de identidade na tabela coordenador_pedago*/
 );

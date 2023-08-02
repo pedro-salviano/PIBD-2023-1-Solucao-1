@@ -1,4 +1,5 @@
-CREATE TABLE IF NOT EXISTS andifes.aluno_graduacao_ministra_turma (
-   aluno_ministrante INTEGER COMMENT "FK para o aluno ministrante",
-   sigla_turma VARCHAR(10) COMMENT "FK para a turma que o aluno ministra"
+CREATE TABLE IF NOT EXISTS aluno_graduacao_ministra_turma (
+   id_ministra_turma INTEGER SERIAL PRIMARY KEY,
+   aluno_ministrante INTEGER,
+   sigla_turma VARCHAR(10)
 );
