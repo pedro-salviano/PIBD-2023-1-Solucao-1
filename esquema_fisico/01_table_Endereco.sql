@@ -1,5 +1,5 @@
 CREATE TABLE IF NO EXISTS andifes.Endereco (
-    Endereco_ID INT PRIMARY KEY,
+    Endereco_ID SERIAL PRIMARY KEY,
     Pais_Endereco varchar(30),
     Estado_Endereco varchar(30),
     Cidade_Endereco varchar(30),
