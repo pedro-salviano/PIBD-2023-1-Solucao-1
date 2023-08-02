@@ -1,4 +1,1 @@
-
-
-
-ALTER TABLE andifes.componente_curricular
+COMMENT ON COLUMN componente_curricular.codigo IS "Codigo que define uma componente, composto por abreviação do idioma, dias da semana, e caractere caso haja mutiplas";
