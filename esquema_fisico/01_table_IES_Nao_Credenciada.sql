@@ -1,4 +1,5 @@
-CREATE TABLE IF NOT EXISTS andifes.IES_Nao_Credenciada(
-    IES_Sigla VARCHAR(50) PRIMARY KEY,
-    Codigo_Cred INTEGER
+CREATE TABLE IES_Nao_Credenciada (
+    Sigla VARCHAR(10) REFERENCES IES(Sigla),
+    Codigo_Cred INTEGER,
+    PRIMARY KEY (Sigla, Codigo_Cred)
 );
