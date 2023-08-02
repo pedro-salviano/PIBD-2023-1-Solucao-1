@@ -5,5 +5,4 @@ CREATE TABLE IF NOT EXISTS Edital(
 	Titulo VARCHAR(50),
 	Data_Inicial TIMESTAMP,
 	Data_Final TIMESTAMP,
-	Gestor_Andifes_Isf_Id INTEGER
 );
