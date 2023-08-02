@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS andifes.aluno_graduacao (
 
     identidade_aluno_graduacao INTEGER CONSTRAINT PK_id_aluno_graduacao PRIMARY KEY,
 
-    FOREIGN KEY (identidade_aluno_graduacao) REFERENCES aluno_professor_isf(identidade_aluno_professor_isf),
+    COMMENT "A FK é a primary key, que referencia um professor ISF",
 
     Poca_File text NOT NULL,
     Edital_Selecao_File text NOT NULL,
