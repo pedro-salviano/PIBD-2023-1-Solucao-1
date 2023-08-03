@@ -1,0 +1,5 @@
+ALTER TABLE orientacao_especialista_aluno ADD CONSTRAINT FK_MembroAcademicoEspecialista FOREIGN KEY (IdentidadeEspecialista)
+REFERENCES nome_da_tabela_do_MembroAcademicoEspecialista (IdentidadeEspecialista);
+
+ALTER TABLE orientacao_especialista_aluno ADD CONSTRAINT FK_MembroAcademicoOrientado FOREIGN KEY (IdentidadeOrientado)
+REFERENCES nome_da_tabela_do_MembroAcademicoOrientado (IdentidadeOrientado);
