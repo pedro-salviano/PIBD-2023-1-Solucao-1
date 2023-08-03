@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Telefone_Parceiro(
+CREATE TABLE IF NOT EXISTS Parceiro_Telefone(
 	Id SERIAL PRIMARY KEY,
 	DDI varchar(4) NOT NULL,
 	DDD varchar(2) NOT NULL,
