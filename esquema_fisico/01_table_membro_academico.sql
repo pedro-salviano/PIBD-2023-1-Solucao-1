@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS membro_academico(
-    id INT SERIAL NOT NULL,
+    id SERIAL NOT NULL,
     identidade INTEGER NOT NULL, 
     nacionalidade varchar(20) NOT NULL,
     pais_de_residencia varchar(19) NOT NULL,
