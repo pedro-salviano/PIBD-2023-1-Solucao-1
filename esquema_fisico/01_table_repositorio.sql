@@ -1,5 +1,5 @@
-CREATE TABLE repositorio(
-    codigo_rep INTEGER UNIQUE NOT NULL
+CREATE TABLE if NOT EXISTS  andifes.repositorio(
+    codigo_rep INTEGER UNIQUE NOT NULL,
     link_ementa VARCHAR(200),
     data_fim DATE, 
   	referencia VARCHAR(200),
