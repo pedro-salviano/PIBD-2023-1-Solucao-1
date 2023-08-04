@@ -5,5 +5,5 @@ CREATE TABLE IF NOT EXISTS Edital(
 	Titulo VARCHAR(50),
 	Data_Criacao DATE,
 	Data_Inicial DATE,
-	Data_Final DATE,
+	Data_Final DATE
 );
