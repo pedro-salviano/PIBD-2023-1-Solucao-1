@@ -1,4 +1,5 @@
 CREATE TABLE Papeis (
-  Identidade VARCHAR(11) PRIMARY KEY,
+  id SERIAL PRIMARY KEY
+  Identidade VARCHAR(11) NOT NULL,
   papel VARCHAR(40) NOT NULL
 );
