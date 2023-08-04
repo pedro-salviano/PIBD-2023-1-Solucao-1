@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS aluno_graduacao (
-    id INTEGER SERIAL PRIMARY KEY,
+    id serial PRIMARY KEY,
     professor_isf_id INTEGER,
 
     Poca_File text NOT NULL,
