@@ -1,4 +1,4 @@
 ALTER TABLE andifes.aluno_especializacao
-        ADD CONSTRAINT FK_Identidade
-            FOREIGN KEY (identidade)
-            REFERENCES alunoProfessorISF(identidade); 
+        ADD CONSTRAINT FK_aluno_prof_id
+            FOREIGN KEY (id)
+            REFERENCES aluno_professor_ISF(id); 
