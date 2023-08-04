@@ -1,8 +1,8 @@
 
 
-CREATE TABLE IF NOT EXISTS andifes.especialista(
+CREATE TABLE IF NOT EXISTS especialista(
     Id SERIAL PRIMARY KEY,
-    Identidade INTEGER NOT NULL,
+    membro_academico_id INTEGER NOT NULL,
     Biodata VARCHAR(200), 
     DispoMinistrar BOOLEAN, 
     Titulacao VARCHAR(200), 
