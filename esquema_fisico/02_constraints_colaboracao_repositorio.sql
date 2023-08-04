@@ -6,7 +6,7 @@ ALTER TABLE colaboracao_repositorio
 ALTER TABLE colaboracao_repositorio
     ADD CONSTRAINT FK_especialista_id 
         FOREIGN KEY(especialista_id)
-        REFERENCES especialista(id);
+        REFERENCES especialista(membro_academico_id);
 
 ALTER TABLE colaboracao_repositorio
     ADD CONSTRAINT FK_codigo_rep 
