@@ -1,1 +1,1 @@
-COMMENT ON COLUMN material.material id 'surrogate material'
+COMMENT ON COLUMN material.material id 'surrogate tabela material'
