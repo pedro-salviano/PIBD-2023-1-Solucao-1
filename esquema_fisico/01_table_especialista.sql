@@ -15,5 +15,7 @@ CREATE TABLE especialista (
   Poca_File VARCHAR(255) NOT NULL,
   Registro_Autoria VARCHAR(255),
   Registro_Ministrante VARCHAR(255),
+  registroMinistrante VARCHAR(100),
   Atuacao_IsF_Anterior BOOLEAN
+  
 );
