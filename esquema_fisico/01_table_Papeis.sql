@@ -1,5 +1,5 @@
 CREATE TABLE Papeis (
   id SERIAL PRIMARY KEY
-  Identidade VARCHAR(11) NOT NULL,
+  especialista_id VARCHAR(11) NOT NULL,
   papel VARCHAR(40) NOT NULL
 );
