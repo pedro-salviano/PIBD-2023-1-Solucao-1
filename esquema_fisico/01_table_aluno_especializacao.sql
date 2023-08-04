@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS aluno_especializacao(
     DiplomaFile VARCHAR(200),
     Titulacao VARCHAR(200),
     RegistroMinistrante VARCHAR(200),
-    PRIMARY KEY (aluno_professor_isf_id)
+    PRIMARY KEY (id)
 )
