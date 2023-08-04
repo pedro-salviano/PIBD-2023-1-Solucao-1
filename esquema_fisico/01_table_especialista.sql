@@ -1,5 +1,5 @@
 CREATE TABLE especialista (
-  Identidade VARCHAR(11) PRIMARY KEY,
+  membro_academico_id INTEGER NOT NULL INTEGER PRIMARY KEY,
   IES_Sigla VARCHAR(10) REFERENCES IES(IES_Sigla),
   Biodata TEXT,
   Dispo_Ministrar INTEGER(2),
