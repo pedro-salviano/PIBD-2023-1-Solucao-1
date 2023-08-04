@@ -1,0 +1,1 @@
+COMMENT ON COLUMN material.material id 'surrogate material'
