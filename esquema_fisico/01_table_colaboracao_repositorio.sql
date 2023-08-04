@@ -1,4 +1,4 @@
-CREATE TABLE if NOT EXISTS andifes.colaboracao_repositorio(
+CREATE TABLE if NOT EXISTS colaboracao_repositorio(
     id SERIAL NOT NULL,
     especialista_id INTEGER NOT NULL,
     orientado_id INTEGER NOT NULL,
