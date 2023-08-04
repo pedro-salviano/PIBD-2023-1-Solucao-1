@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS membro_academico_endereco(
-    id INT SERIAL NOT NULL,
+    id SERIAL NOT NULL,
     membro_academico_id INT NOT NULL, /* Foreign key */
     complemento varchar(10),
     codigo_postal varchar(10),
