@@ -1,4 +1,5 @@
 CREATE TABLE Horario (
-  Horario_de_ocorrencia INT PRIMARY KEY,
+  id SERIAL PRIMARY KEY
+  Horario_de_ocorrencia INT NOT NULL,
   Horario_Termino TIME NOT NULL
 );
