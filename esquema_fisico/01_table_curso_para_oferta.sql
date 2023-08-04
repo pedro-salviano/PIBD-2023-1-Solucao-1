@@ -7,5 +7,5 @@ CREATE TABLE IF NOT EXISTS curso_para_oferta(
  categoria varchar(40),
  idioma varchar(15),
  carga_horaria INTEGER,
- link_ementa text,
+ link_ementa text
 );
