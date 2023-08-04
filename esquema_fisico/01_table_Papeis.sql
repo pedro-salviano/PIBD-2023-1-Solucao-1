@@ -1,0 +1,4 @@
+CREATE TABLE Papeis (
+  Identidade VARCHAR(11) PRIMARY KEY,
+  papel VARCHAR(40) NOT NULL
+);
