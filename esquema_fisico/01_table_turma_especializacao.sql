@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS turma_especializacao( 
-	turma_especializacao_id INTEGER CONSTRAINT PK_turma_especializacao PRIMARY KEY,
+	id INTEGER CONSTRAINT PK_turma_especializacao PRIMARY KEY,
 	Data_Fim DATE,
 	Data_Inicio DATE NOT NULL,
 	Horario_de_ocorrencia VARCHAR(30) NOT NULL,
