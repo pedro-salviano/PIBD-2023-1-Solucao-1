@@ -2,7 +2,7 @@
 
 
 ALTER TABLE especialista_produz_material
-    ADD CONSTRAINT FK_especialista_id FOREIGN KEY (especialista_id) REFERENCES especialista(especialista_id);
+    ADD CONSTRAINT FK_especialista_id FOREIGN KEY (especialista_id) REFERENCES especialista(membro_academico_id);
 
 ALTER TABLE especialista_produz_material
     ADD CONSTRAINT FK_material_id FOREIGN KEY (material_id) REFERENCES material(material_id);
