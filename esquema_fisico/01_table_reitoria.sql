@@ -1,8 +1,7 @@
-CREATE TABLE IF NOT EXISTS andifes.reitoria (
-    Inicio_Periodo date,
-    Final_Periodo date,
-    Email varchar(30),
-    Numero_telefone varchar(9),
-    DDD_telefone varchar(2),
-    DDI_telefone varchar(3)
+CREATE TABLE IF NOT EXISTS reitoria (
+    id SERIAL NOT NULL,
+    IES_Sigla VARCHAR(10) PRIMARY KEY,
+    Inicio_Periodo DATE PRIMARY KEY,
+    Final_Periodo DATE,
+    PRIMARY KEY(id)
 );
