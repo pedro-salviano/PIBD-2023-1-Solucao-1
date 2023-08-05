@@ -1,7 +1,7 @@
 ALTER TABLE trilha_escolhida
-    ADD CONSTRAINT FK_idioma
-        FOREIGN KEY (idioma)
-        REFERENCES trilha_ofertada(idioma);
+    ADD CONSTRAINT FK_trilha_ofertada_id
+        FOREIGN KEY (trilha_ofertada_id)
+        REFERENCES trilha_ofertada(id);
 
 ALTER TABLE trilha_escolhida
     ADD CONSTRAINT FK_codigo
