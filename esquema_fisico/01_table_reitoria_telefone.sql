@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS reitoria_telefone(
-    id INTEGER SERIAL NOT NULL,
+    id SERIAL NOT NULL,
     reitoria_id INT NOT NULL, /* Foreign key */
     Numero_telefone VARCHAR(9),
     DDD_telefone VARCHAR(2),
