@@ -3,3 +3,5 @@ ADD CONSTRAINT FK_orientacao_especialista_aluno FOREIGN KEY (orientacao_especial
 
 ALTER TABLE especialista_ministra_turma
 ADD CONSTRAINT FK_Turma FOREIGN KEY (turma_id) REFERENCES turma (id);
+
+AQUII
