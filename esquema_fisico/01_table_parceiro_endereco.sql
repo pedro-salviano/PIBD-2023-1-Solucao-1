@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS Parceiro_Endereco(
 	Cidade VARCHAR(50),
 	Estado VARCHAR(50),
 	Complemento VARCHAR(50),
-    Parceiro_Id INTEGER,
+    Parceiro_Id INTEGER
 );

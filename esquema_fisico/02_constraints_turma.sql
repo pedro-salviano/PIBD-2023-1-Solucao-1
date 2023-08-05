@@ -1,0 +1,1 @@
+ALTER TABLE turma ADD CONSTRAINT fk_codigo_curso FOREIGN KEY(curso_para_oferta_id) REFERENCES curso_para_oferta(id);

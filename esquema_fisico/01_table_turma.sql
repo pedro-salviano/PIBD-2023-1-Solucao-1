@@ -1,11 +1,13 @@
-CREATE TABLE turma (/*temos que ver os atributos que são calculadors*/
-  Codigo INT NOT NULL,
-  Sigla VARCHAR(10) NOT NULL,
-  Data_Inicial DATE NOT NULL,
-  Data_Final DATE NOT NULL,
-  Qtd_Inscritos INT NOT NULL,
-  Qtd_Evadidos INT NOT NULL,
-  Qtd_Desistentes INT NOT NULL,
-  Qtd_Concluintes INT NOT NULL,
-  turma_id SERIAL PRIMARY KEY
+
+CREATE TABLE IF NOT EXISTS turma(
+ id INT SERIAL,
+ curso_para_oferta_id INTEGER,
+ sigla varchar(10),
+ data_inicial DATE,
+ data_final DATE,
+ Qtd_Inscritos INTEGER,
+ Qtd_Evadidos INTEGER,
+ Qtd_Desistentes INTEGER,
+ Qtd_Concluintes INTEGER,
+ PRIMARY KEY (id)
 );
