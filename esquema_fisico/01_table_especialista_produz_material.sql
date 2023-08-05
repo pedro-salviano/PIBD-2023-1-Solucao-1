@@ -1,7 +1,7 @@
 
 
-CREATE TABLE IF NOT EXISTS andifes.especialista_produz_material(
-    produz_material_id SERIAL CONSTRAINT PK_codigo PRIMARY KEY,
-    especialista_identidade INT COMMENT "FK para especialista",
-    material_id INT COMMENT "FK para material"
+CREATE TABLE IF NOT EXISTS especialista_produz_material(
+    produz_material_id SERIAL CONSTRAINT PK_especialista_produz_material PRIMARY KEY,
+    membro_academico_id INTEGER,
+    material_id INTEGER
 );
