@@ -1,7 +1,7 @@
 ALTER TABLE dia_da_semana
-    ADD CONSTRAINT fk_idioma
-        FOREIGN KEY(idioma)
-        REFERENCES trilhas_ofertadas(idioma)
+    ADD CONSTRAINT fk_oferta_id
+        FOREIGN KEY(trilha_ofertada_id)
+        REFERENCES trilhas_ofertadas(id)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE;
 
