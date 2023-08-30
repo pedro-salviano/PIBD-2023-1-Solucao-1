@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS turma(
- id INT SERIAL,
+ id SERIAL,
  curso_para_oferta_id INTEGER,
  sigla varchar(10),
  data_inicial DATE,
