@@ -1,12 +1,18 @@
 CREATE OR REPLACE PROCEDURE procOrientGrad(chaveOrientador int, chaveAluno int)
 LANGUAGE SQL
 AS $$
+BEGIN
     INSERT INTO orientacao (membro_academico_id, aluno_professor_isf_id, data_inicial)
     VALUES (
         chaveOrientador,
         chaveAluno,
         NOW()
     );
+    RAISE NOTICE 'Criação de orientação concluída.';
+    EXCEPTION
+        WHEN others THEN
+            RAISE EXCEPTION 'Erro ao criar orientação: %', SQLERRM;
+END;
 $$;
 
 --SCRIPT PARA TESTE
