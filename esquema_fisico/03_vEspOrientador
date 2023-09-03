@@ -1,0 +1,10 @@
+CREATE OR REPLACE VIEW view_alunos_orientados AS
+SELECT e.membro_academico_id AS id_especialista, 
+       m.nome_completo AS nome_especialista, 
+       a.RA AS ra_aluno,
+       m_aluno.nome_completo AS nome_aluno
+FROM especialista e
+JOIN orientacao o ON e.membro_academico_id = o.membro_academico_id
+JOIN aluno_professor_isf a ON o.aluno_professor_isf_id = a.membro_academico_id
+JOIN membro_academico m ON e.membro_academico_id = m.id
+JOIN membro_academico m_aluno ON a.membro_academico_id = m_aluno.id;
