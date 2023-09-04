@@ -1,3 +1,90 @@
+CREATE TABLE IF NOT EXISTS especialista(
+    membro_academico_id INTEGER NOT NULL,
+    Biodata VARCHAR(200), 
+    DispoMinistrar BOOLEAN, 
+    Titulacao VARCHAR(200), 
+    Lingua VARCHAR(200), 
+    DeclaracaoProficiencia VARCHAR(200), 
+    DispoOriEsp BOOLEAN, 
+    VinculoFile VARCHAR(200), 
+    Curriculo VARCHAR(200), 
+    DataCredenciamento DATE, 
+    DisponibilidadeAutor VARCHAR(200), 
+    Papeis VARCHAR(200), 
+    ResetNeed BOOLEAN, 
+    DiplomaFile VARCHAR(200), 
+    LinkCnpq VARCHAR(200), 
+    PocaFile VARCHAR(200), 
+    RegistroAutoria VARCHAR(200), 
+    RegistroMinistrante VARCHAR(200),
+    PRIMARY KEY (membro_academico_id)
+);
+CREATE TABLE IF NOT EXISTS aluno_professor_isf (
+    membro_academico_id INTEGER,
+    RA VARCHAR(15) NOT NULL,
+    PRIMARY KEY (membro_academico_id)
+);
+CREATE TABLE IF NOT EXISTS membro_academico(
+    id SERIAL NOT NULL,
+    identidade INTEGER NOT NULL, 
+    nacionalidade varchar(20) NOT NULL,
+    pais_de_residencia varchar(19) NOT NULL,
+    nome_completo varchar(70) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    nome_da_mae varchar(70),
+    genero varchar(20),
+    PRIMARY KEY (id)
+);
+CREATE TABLE IF NOT EXISTS orientacao (
+    id SERIAL PRIMARY KEY,
+    membro_academico_id INT, 
+    aluno_professor_isf_id INT, 
+    data_inicial DATE,
+    data_final DATE
+);
+ALTER TABLE aluno_professor_isf
+    ADD CONSTRAINT FK_membro_academico FOREIGN KEY (membro_academico_id) REFERENCES membro_academico(id);
+
+ALTER TABLE especialista
+    ADD CONSTRAINT FK_membro_academico_id
+        FOREIGN KEY (membro_academico_id)
+        REFERENCES membro_academico(Id);
+        
+ALTER TABLE orientacao
+ADD CONSTRAINT FK_especialista FOREIGN KEY (membro_academico_id) REFERENCES especialista(membro_academico_id);
+
+ALTER TABLE orientacao
+ADD CONSTRAINT FK_aluno_professor_isf FOREIGN KEY (aluno_professor_isf_id) REFERENCES aluno_professor_isf(membro_academico_id);
+
+
+-- Inserir dados em membro_academico (pode ser tanto especialista quanto aluno ISF)
+INSERT INTO membro_academico (identidade, nacionalidade, pais_de_residencia, nome_completo, data_nascimento, nome_da_mae, genero)
+VALUES
+    (1, 'Brasileira', 'Brasil', 'Especialista 1', '1990-01-01', 'Mãe Especialista 1', 'Masculino'),
+    (2, 'Brasileira', 'Brasil', 'Aluno ISF 1', '1995-02-01', 'Mãe Aluno ISF 1', 'Feminino'),
+    (3, 'Brasileira', 'Brasil', 'Especialista 2', '1985-03-01', 'Mãe Especialista 2', 'Masculino'),
+    (4, 'Brasileira', 'Brasil', 'Aluno ISF 2', '1998-04-01', 'Mãe Aluno ISF 2', 'Feminino');
+
+-- Inserir dados em especialista (somente especialistas)
+INSERT INTO especialista (membro_academico_id, Biodata, DispoMinistrar, Titulacao, Lingua, DeclaracaoProficiencia, DispoOriEsp, VinculoFile, Curriculo, DataCredenciamento, DisponibilidadeAutor, Papeis, ResetNeed, DiplomaFile, LinkCnpq, PocaFile, RegistroAutoria, RegistroMinistrante)
+VALUES
+    (1, 'Biodata 1', true, 'Titulação 1', 'Língua 1', 'Declaracao 1', true, 'Vínculo 1', 'Curriculo 1', '2020-01-01', 'DisponibilidadeAutor 1', 'Papeis 1', false, 'DiplomaFile 1', 'LinkCnpq 1', 'PocaFile 1', 'RegistroAutoria 1', 'RegistroMinistrante 1'),
+    (3, 'Biodata 2', true, 'Titulação 2', 'Língua 2', 'Declaracao 2', true, 'Vínculo 2', 'Curriculo 2', '2021-02-01', 'DisponibilidadeAutor 2', 'Papeis 2', false, 'DiplomaFile 2', 'LinkCnpq 2', 'PocaFile 2', 'RegistroAutoria 2', 'RegistroMinistrante 2');
+
+-- Inserir dados em aluno_professor_isf (somente alunos ISF)
+INSERT INTO aluno_professor_isf (membro_academico_id, RA)
+VALUES
+    (2, 'RA Aluno ISF 1'),
+    (4, 'RA Aluno ISF 2');
+
+-- Inserir dados em orientacao para relacionar especialistas e alunos ISF
+INSERT INTO orientacao (membro_academico_id, aluno_professor_isf_id, data_inicial, data_final)
+VALUES
+    (1, 2, '2020-01-01', '2021-01-01'),
+    (3, 4, '2021-02-01', '2022-02-01');
+
+//view
+ 
 CREATE OR REPLACE VIEW view_alunos_orientados AS
 SELECT e.membro_academico_id AS id_especialista, 
        m.nome_completo AS nome_especialista, 
@@ -8,3 +95,10 @@ JOIN orientacao o ON e.membro_academico_id = o.membro_academico_id
 JOIN aluno_professor_isf a ON o.aluno_professor_isf_id = a.membro_academico_id
 JOIN membro_academico m ON e.membro_academico_id = m.id
 JOIN membro_academico m_aluno ON a.membro_academico_id = m_aluno.id;
+
+
+//select do atributo, pd ser ra ou nome
+SELECT ra_aluno
+FROM view_alunos_orientados
+WHERE id_especialista = 3;
+
