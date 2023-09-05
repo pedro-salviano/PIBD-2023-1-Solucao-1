@@ -16,13 +16,13 @@ CREATE TABLE IF NOT EXISTS membro_academico(
     genero varchar(20),
     PRIMARY KEY (id)
 );
-*/
+
 -------------------------------Table orientacao
-/*
+
 CREATE TABLE IF NOT EXISTS orientacao (
     id SERIAL PRIMARY KEY,
-    membro_academico_id INT, /*chave primária especialista*/
-    aluno_professor_isf_id INT, /*chave primária aluno esp */
+    membro_academico_id INT, --chave primária especialista
+    aluno_professor_isf_id INT, --chave primária aluno esp 
     data_inicial DATE,
     data_final DATE
 );
@@ -33,9 +33,9 @@ REFERENCES membro_academico(identidade);
 ALTER TABLE orientacao 
 ADD CONSTRAINT FK_aluno_esp FOREIGN KEY (aluno_professor_isf_id) 
 REFERENCES aluno_especializacao(aluno_professor_isf_id);
-*/
+
 -------------------------------Table aluno_especializacao
-/*
+
 CREATE TABLE IF NOT EXISTS aluno_especializacao(
 	id SERIAL PRIMARY KEY,
 	aluno_professor_isf_id INTEGER NOT NULL UNIQUE, 
@@ -50,10 +50,10 @@ ALTER TABLE aluno_especializacao
         ADD CONSTRAINT FK_aluno_prof_id
             FOREIGN KEY (aluno_professor_isf_id)
             REFERENCES aluno_professor_isf(membro_academico_id); 
-*/
+
 
 -------------------------------Table aluno_professor_isf
-/*
+
 CREATE TABLE IF NOT EXISTS aluno_professor_isf (
 	id SERIAL PRIMARY KEY,
     membro_academico_id INTEGER UNIQUE NOT NULL,
