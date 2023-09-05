@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS aluno_professor_isf (
 
 CREATE TABLE IF NOT EXISTS orientacao (
     id SERIAL PRIMARY KEY,
-    membro_academico_id INT, /*chave primária especialista*/
-    aluno_professor_isf_id INT, /*chave primária aluno esp */
+    membro_academico_id INT,
+    aluno_professor_isf_id INT,
     data_inicial DATE,
     data_final DATE
 );
