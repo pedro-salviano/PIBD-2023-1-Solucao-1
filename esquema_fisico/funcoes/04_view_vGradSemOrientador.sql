@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS especialista(
 
 CREATE TABLE IF NOT EXISTS membro_academico(
     id SERIAL NOT NULL,
-    identidade INTEGER NOT NULL, 
+    identidade VARCHAR(20) NOT NULL, 
     nacionalidade varchar(20) NOT NULL,
     pais_de_residencia varchar(19) NOT NULL,
     nome_completo varchar(70) NOT NULL,
@@ -84,10 +84,10 @@ ALTER TABLE especialista
 -- Inserir dados na tabela membro_academico
 INSERT INTO membro_academico (identidade, nacionalidade, pais_de_residencia, nome_completo, data_nascimento, nome_da_mae, genero)
 VALUES
-    (123456789, 'Brasileira', 'Brasil', 'João da Silva', '1990-05-15', 'Maria da Silva', 'Masculino'),
-    (987654321, 'Estrangeira', 'Estados Unidos', 'Alice Johnson', '1985-12-10', 'Sarah Johnson', 'Feminino'),
-    (555555555, 'Brasileira', 'Brasil', 'Pedro Oliveira', '1995-08-25', 'Ana Oliveira', 'Masculino'),
-    (555423555, 'Brasileira', 'Brasil', 'Pedro Adsg', '1995-08-25', 'Ana Oliveira', 'Masculino');
+    ('123456789', 'Brasileira', 'Brasil', 'João da Silva', '1990-05-15', 'Maria da Silva', 'Masculino'),
+    ('987654321', 'Estrangeira', 'Estados Unidos', 'Alice Johnson', '1985-12-10', 'Sarah Johnson', 'Feminino'),
+    ('555555555', 'Brasileira', 'Brasil', 'Pedro Oliveira', '1995-08-25', 'Ana Oliveira', 'Masculino'),
+    ('555423555', 'Brasileira', 'Brasil', 'Pedro Adsg', '1995-08-25', 'Ana Oliveira', 'Masculino');
 
 -- Inserir dados na tabela aluno_professor_isf
 INSERT INTO aluno_professor_isf (membro_academico_id, RA)
