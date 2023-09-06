@@ -1,5 +1,5 @@
 CREATE OR REPLACE PROCEDURE procOrientGrad(chaveOrientador int, chaveAluno int)
-LANGUAGE SQL
+LANGUAGE plpgsql
 AS $$
 BEGIN
     INSERT INTO orientacao (membro_academico_id, aluno_professor_isf_id, data_inicial)
