@@ -69,15 +69,15 @@ ALTER TABLE aluno_professor_isf
 
 CREATE OR REPLACE VIEW vOrientados AS
 SELECT 
-    o.identidade AS orientador_id,
+    o.id AS orientador_id,
     o.nome_completo AS orientador_nome,
-    a.identidade AS orientado_id,
+    a.id AS orientado_id,
     a.nome_completo AS orientado_nome,
 	CASE WHEN oe.data_final IS NULL OR oe.data_final > CURRENT_DATE THEN 'ativo' ELSE 'inativo' END AS status
 FROM 
     orientacao oe
 LEFT JOIN
-    membro_academico o ON oe.membro_academico_id = o.identidade -- Orientadores
+    membro_academico o ON oe.membro_academico_id = o.id -- Orientadores
 LEFT JOIN
     aluno_especializacao ae ON oe.aluno_professor_isf_id = ae.aluno_professor_isf_id
 LEFT JOIN
