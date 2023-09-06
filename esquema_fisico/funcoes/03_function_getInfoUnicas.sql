@@ -1,4 +1,5 @@
-/* Script comentado para ser usado em testes
+/*
+--Script comentado para ser usado em testes
 
 CREATE TABLE IF NOT EXISTS membro_academico(
     id SERIAL NOT NULL,
@@ -60,6 +61,7 @@ VALUES
 
 CREATE OR REPLACE VIEW vInfoUnicas AS
 SELECT
+  ma.id,
   ma.nome_completo,
   ma.nacionalidade,
   ma.identidade,
@@ -75,7 +77,7 @@ JOIN
 	aluno_especializacao ae ON ae.aluno_professor_isf_id = ma.id;
 */
 
-CREATE OR REPLACE FUNCTION getInfoUnicas()
+CREATE OR REPLACE FUNCTION getInfoUnicas(user_id INT)
 RETURNS TABLE (
   nome_completo VARCHAR(70),
   nacionalidade VARCHAR(20),
@@ -89,10 +91,27 @@ RETURNS TABLE (
 )
 AS $func$
 BEGIN
-    RETURN QUERY SELECT * FROM vInfoUnicas v;
+    RETURN QUERY (
+        SELECT
+            v.nome_completo,
+            v.nacionalidade,
+            v.identidade,
+            v.nome_da_mae,
+            v.data_nascimento,
+            v.genero,
+            v.pais_de_residencia,
+            v.DataIngresso,
+            v.DataConclusao
+        FROM
+          vInfoUnicas v
+        JOIN
+          	membro_academico ma ON v.id = ma.id
+        WHERE
+          ma.id = user_id
+    );
 EXCEPTION
-        WHEN others THEN
-            RAISE EXCEPTION 'Erro ao obter as informações';
+    WHEN others THEN
+        RAISE EXCEPTION 'Erro ao obter as informações';
 END;
-$func$ 
+$func$
 LANGUAGE plpgsql;
