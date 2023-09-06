@@ -8,7 +8,7 @@ SELECT
   ma.genero,
   ma.pais_de_residencia,
   ae.DataIngresso,
-  ae.DataConclusao,
+  ae.DataConclusao
 FROM
 	membro_academico ma
 JOIN
