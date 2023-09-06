@@ -1,0 +1,33 @@
+CREATE OR REPLACE FUNCTION getTurmaOfferTrilha(
+    chave_aluno_esp text,
+)
+RETURNS TABLE (
+    Turma character varying(70),
+    DataInicio character varying(70),
+    DataFinal character varying(70), 
+    Horario character varying(70) 
+) AS
+$$
+BEGIN
+    RETURN QUERY
+    SELECT 
+		cc.nome_completo as Turma,
+		te.data_inicio as DataInicio,
+		te.data_final as DataFinal,
+		trilha_of.carga_horaria as Horario
+ 	FROM aluno_especializacao ae--Utiliza a view vOrientados para retornar a table
+    LEFT JOIN
+		aluno_esp_cursa_turma_esp alunoCursa ON ae.aluno_professor_isf_id = alunoCursa.aluno_professor_isf_id
+	LEFT JOIN
+		turma_especializacao te ON alunoCursa.turma_especializacao_id = te.id
+	LEFT JOIN
+		trilha_escolhida trilha_es ON te.trilha_escolhida_id = trilha_es.id
+	LEFT JOIN
+		trilha_ofertada trilha_of ON trilha_es.trilha_ofertada_id = trilha_of.id
+	LEFT JOIN
+		componente_curricular cc ON trilha_es.componente_curricular_id = cc.id_componente_curricular
+	WHERE
+        (ae.aluno_professor_isf_id = chave_aluno_esp);
+END;
+$$
+LANGUAGE plpgsql;
