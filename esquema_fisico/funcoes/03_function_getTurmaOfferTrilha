@@ -3,8 +3,8 @@ CREATE OR REPLACE FUNCTION getTurmaOfferTrilha(
 )
 RETURNS TABLE (
     Turma character varying(70),
-    DataInicio character varying(70),
-    DataFinal character varying(70), 
+    DataInicio date,
+    DataFinal date), 
     Horario character varying(70) 
 ) AS
 $$
