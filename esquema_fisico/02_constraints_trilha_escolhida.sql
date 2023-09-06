@@ -4,7 +4,6 @@ ALTER TABLE trilha_escolhida
         REFERENCES trilha_ofertada(id);
 
 ALTER TABLE trilha_escolhida
-    ADD CONSTRAINT FK_codigo
-        FOREIGN KEY (codigo)
-        REFERENCES componente_curricular(codigo);
-
+    ADD CONSTRAINT FK_componente_curricular_id
+        FOREIGN KEY (componente_curricular_id)
+        REFERENCES componente_curricular(id_componente_curricular);
