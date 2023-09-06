@@ -1,4 +1,3 @@
-
 -- CREATE TABLE IF NOT EXISTS especialista(
 --     membro_academico_id INTEGER NOT NULL,
 --     Biodata VARCHAR(200), 
@@ -58,7 +57,6 @@
 -- 	id_componente_curricular INT,                              /* FK para componente_curricular */
 -- 	estado VARCHAR(20),                                        /* estado: obsoleto, incompleto, completo */
 -- 	material_anterior_id INT,                                   /* FK para material, para versionamento */
--- 	especialista_id INTEGER NOT NULL
 -- );
 
 -- ALTER TABLE material ADD CONSTRAINT 
@@ -71,11 +69,21 @@
 -- (material_anterior_id) REFERENCES 
 -- material(material_id);
 
--- ALTER TABLE material ADD CONSTRAINT 
--- FK_especialista_id FOREIGN KEY 
--- (especialista_id) REFERENCES 
--- especialista(membro_academico_id);
 
+
+-- CREATE TABLE IF NOT EXISTS especialista_produz_material(
+--     produz_material_id SERIAL CONSTRAINT PK_especialista_produz_material PRIMARY KEY,
+--     membro_academico_id INTEGER,
+--     material_id INTEGER
+-- );
+
+-- ALTER TABLE especialista_produz_material
+--     ADD CONSTRAINT FK_especialista_id 
+	-- FOREIGN KEY (especialista_id) REFERENCES especialista(membro_academico_id);
+
+-- ALTER TABLE especialista_produz_material
+--     ADD CONSTRAINT FK_material_id 
+	-- FOREIGN KEY (material_id) REFERENCES material(material_id);
 
 
 
@@ -84,7 +92,7 @@
 
 CREATE OR REPLACE VIEW vMaterial AS
 SELECT 
-	especialista_id,
+	material_id,
 	endereco_link,
 	id_componente_curricular,
 	estado,
@@ -137,7 +145,9 @@ FROM
 LEFT JOIN
 	componente_curricular CC ON CC.id_componente_curricular = M.id_componente_curricular
 LEFT JOIN
-	especialista E ON E.membro_academico_id = M.especialista_id
+	especialista_produz_material EPM ON EPM.material_id = M.material_id
+LEFT JOIN
+	especialista E ON E.membro_academico_id = EPM.membro_academico_id
 LEFT JOIN 
     membro_academico MA ON MA.id = E.membro_academico_id
 LEFT JOIN 
