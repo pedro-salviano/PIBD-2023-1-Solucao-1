@@ -2,7 +2,7 @@ CREATE OR REPLACE VIEW vEmail AS
 SELECT 
     ma.nome_completo,
     mae.valor,
-    mae.tipo,
+    mae.tipo
 FROM 
     membro_academico ma
 JOIN 
