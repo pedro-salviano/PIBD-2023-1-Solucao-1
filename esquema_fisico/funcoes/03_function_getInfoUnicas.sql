@@ -75,6 +75,7 @@ FROM
 	membro_academico ma
 JOIN
 	aluno_especializacao ae ON ae.aluno_professor_isf_id = ma.id;
+
 */
 
 CREATE OR REPLACE FUNCTION getInfoUnicas(user_id INT)
@@ -104,10 +105,8 @@ BEGIN
             v.DataConclusao
         FROM
           vInfoUnicas v
-        JOIN
-          	membro_academico ma ON v.id = ma.id
         WHERE
-          ma.id = user_id
+          v.id = user_id
     );
 EXCEPTION
     WHEN others THEN
