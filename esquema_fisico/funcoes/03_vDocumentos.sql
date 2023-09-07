@@ -1,5 +1,15 @@
 /* SCRIP PARA TESTE - PARTE 1
-
+CREATE TABLE IF NOT EXISTS membro_academico(
+    id SERIAL NOT NULL,
+    identidade VARCHAR(20) NOT NULL, 
+    nacionalidade varchar(20) NOT NULL,
+    pais_de_residencia varchar(19) NOT NULL,
+    nome_completo varchar(70) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    nome_da_mae varchar(70),
+    genero varchar(20),
+    PRIMARY KEY (id)
+);
 CREATE TABLE IF NOT EXISTS especialista(
     membro_academico_id INTEGER NOT NULL,
     Biodata VARCHAR(200), 
@@ -22,6 +32,15 @@ CREATE TABLE IF NOT EXISTS especialista(
     PRIMARY KEY (membro_academico_id)
 );
 
+CREATE TABLE IF NOT EXISTS aluno_professor_isf (
+    membro_academico_id INTEGER,
+    RA VARCHAR(15) NOT NULL,
+    PRIMARY KEY (membro_academico_id)
+);
+
+
+
+
 CREATE TABLE IF NOT EXISTS aluno_especializacao(
     aluno_professor_isf_id INTEGER NOT NULL, 
     DataIngresso DATE NOT NULL,
@@ -42,6 +61,9 @@ ALTER TABLE aluno_especializacao
         ADD CONSTRAINT FK_aluno_prof_id
             FOREIGN KEY (aluno_professor_isf_id)
             REFERENCES aluno_professor_isf(membro_academico_id); 
+
+ALTER TABLE aluno_professor_isf
+    ADD CONSTRAINT FK_membro_academico FOREIGN KEY (membro_academico_id) REFERENCES membro_academico(id);
 */
 
 -- Declaração da View:
@@ -51,18 +73,29 @@ ALTER TABLE aluno_especializacao
 	Comprovação de vinculo), mostrando a qualificação para exercer a vaga. 
 */
 
-CREATE OR REPLACE VIEW vDocumentos as 
+-- Declaração da View
+/*
+cria a view vDocumentos ou a substitui se ela já existir.
+*/
+
+CREATE OR REPLACE VIEW vDocumentos AS
 SELECT 
-		esp.Titulacao as Titulacao,
-		esp.Tempo_de_atuacao as DisponibilidadeAutor,
-		esp.Nivel_de_proficiencia as DeclaracaoProficiencia,
-		esp.Diploma as Diploma, 
-		ae.Comprovacao_profissional as RegistroMinistrante,
-		esp.Comprovacao_de_vinculo as VinculoFile
-FROM 
-		especialista esp 
-JOIN 
-		aluno_especializacao ae ON  = ae.esp
+    e.membro_academico_id AS Id_Individuo,
+    e.Titulacao AS Titulacao,
+    e.DisponibilidadeAutor AS DisponibilidadeAutor,
+    e.DeclaracaoProficiencia AS DeclaracaoProficiencia,
+    ae.DiplomaFile AS Diploma,
+    ae.RegistroMinistrante AS RegistroMinistrante,
+    e.VinculoFile AS VinculoFile
+FROM
+    membro_academico ma
+LEFT JOIN
+    especialista e ON ma.id = e.membro_academico_id --Pega a tabela especialista mediante o id membro_academico
+LEFT JOIN
+	aluno_professor_isf apISF ON ma.id = apISF.membro_academico_id --Para chegar em Aluno_Especialização necessário intermédio dessa tabela
+LEFT JOIN
+	aluno_especializacao ae ON apISF.membro_academico_id = ae.aluno_professor_isf_id; --Chegamos na tabela ae
+
 
 /*
 --SCRIPT PARA TESTE - PARTE 2
@@ -70,8 +103,75 @@ JOIN
 
 SELECT * FROM vDocumentos;
 
-INSERT INTO especialista(Titulacao, Diploma, DeclaracaoProficiencia)
-VALUES('Doutorado', 'Academia de letras do brasil', 'Certificado e proficiencia');
+INSERT INTO membro_academico (identidade, nacionalidade, pais_de_residencia, nome_completo, data_nascimento, nome_da_mae, genero)
+VALUES ('123456789', 'Brasileiro', 'Brasil', 'Johny Cage', '1990-01-15', 'Mary Doe', 'Male');
+
+SELECT * FROM membro_academico;
+
+INSERT INTO especialista (
+    membro_academico_id, 
+    Biodata, 
+    DispoMinistrar, 
+    Titulacao, 
+    Lingua, 
+    DeclaracaoProficiencia, 
+    DispoOriEsp, 
+    VinculoFile, 
+    Curriculo, 
+    DataCredenciamento, 
+    DisponibilidadeAutor, 
+    Papeis, 
+    ResetNeed, 
+    DiplomaFile, 
+    LinkCnpq, 
+    PocaFile, 
+    RegistroAutoria, 
+    RegistroMinistrante
+)
+VALUES (
+    (SELECT MAX(id) from membro_academico WHERE nome_completo = 'Johny Cage'), 
+    'Some biodata information goes here', 
+    true, 
+    'PhD in Computer Science', 
+    'English', 
+    'Proficient', 
+    true, 
+    'path_to_vinculo_file.pdf', 
+    'path_to_curriculo.pdf', 
+    '2023-09-07', 
+    'Available for authorship', 
+    'Reviewer, Author', 
+    false, 
+    'path_to_diploma_file.pdf', 
+    'https://www.example.com/cnpq', 
+    'path_to_poca_file.pdf', 
+    'Author123', 
+    'Ministrante456'
+);
+
+
+
+SELECT * FROM especialista;
+
+INSERT INTO aluno_professor_isf (membro_academico_id, RA)
+VALUES ((SELECT MAX(id) from membro_academico WHERE nome_completo = 'Johny Cage'), '12345');
+
+INSERT INTO aluno_especializacao (
+    aluno_professor_isf_id, 
+    DataIngresso, 
+    DataConclusao, 
+    DiplomaFile, 
+    Titulacao, 
+    RegistroMinistrante
+)
+VALUES (
+    (SELECT MAX(id) from membro_academico WHERE nome_completo = 'Johny Cage'), 
+    '2022-01-15', 
+    '2023-12-31', 
+    'path_to_diploma.pdf', 
+    'Master of Arts in Linguistics', 
+    'Ministrante123'
+);
 
 SELECT * FROM vDocumentos;
 */
