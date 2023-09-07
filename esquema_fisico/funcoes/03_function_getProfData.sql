@@ -12,7 +12,7 @@ RETURNS TABLE (
 )
 AS $func$
 BEGIN
-    RETURN QUERY
+    RETURN QUERY(
         SELECT
             v.aluno_professor_id,
             v.nome_completo,
