@@ -98,8 +98,8 @@ RETURNS TABLE (
     nome_completo VARCHAR(70),
     pais_de_residencia VARCHAR(20),
     data_nascimento DATE,
-    codigo_pais_telefone INTEGER,
-    codigo_area_telefone INTEGER,
+    codigo_pais_telefone VARCHAR(3),
+    codigo_area_telefone VARCHAR(3),
     numero_telefone VARCHAR(20),
     tipo VARCHAR(20),
     email VARCHAR(70)
