@@ -89,20 +89,58 @@
 
 
 
+-- CREATE TABLE if NOT EXISTS colaboracao_repositorio(
+--     id SERIAL NOT NULL,
+--     orientacao_id INTEGER NOT NULL,
+--     orientado_id INTEGER NOT NULL,
+--     codigo_rep INTEGER NOT NULL, 
+--     PRIMARY KEY(id)
+-- )
+
+
+
+
+-- ALTER TABLE colaboracao_repositorio
+--     ADD CONSTRAINT FK_orientado_id 
+--         FOREIGN KEY(orientado_id)
+--         REFERENCES aluno_especializacao(id);
+
+-- ALTER TABLE colaboracao_repositorio
+--     ADD CONSTRAINT FK_orientacao_id 
+--         FOREIGN KEY(orientacao_id)
+--         REFERENCES especialista(membro_academico_id);
+
+-- ALTER TABLE colaboracao_repositorio
+--     ADD CONSTRAINT FK_codigo_rep 
+--   		FOREIGN KEY(codigo_rep)
+--   			REFERENCES repositorio(codigo_rep);
+
+
+
+-- CREATE TABLE if NOT EXISTS  repositorio(
+--     codigo_rep INTEGER UNIQUE NOT NULL,
+--     link_ementa VARCHAR(200),
+--     data_fim DATE, 
+--   	referencia VARCHAR(200),
+--   	nome_completo VARCHAR(200),
+--   PRIMARY Key(codigo_rep)
+-- )
+
+
 
 CREATE OR REPLACE VIEW vMaterial AS
 SELECT 
 	material_id,
 	endereco_link,
 	id_componente_curricular,
-	estado,
+	M.estado as Material_Estado,
 	material_anterior_id,
 	CC.codigo,
     CC.carga_horaria,
     CC.Eixo_tematico,
     CC.Obrigatoriedade,
     CC.Tipo_disciplina,
-    CC.Nome_completo,
+    CC.Nome_completo as Nome_Componente,
 	E.Biodata , 
     E.DispoMinistrar, 
     E.Titulacao , 
@@ -120,6 +158,12 @@ SELECT
     E.PocaFile , 
     E.RegistroAutoria , 
     E.RegistroMinistrante,
+    CR.orientacao_id AS Especialista_id,
+    CR.orientado_id AS Orientado_id,
+    CR.codigo_rep AS Codigo_Repositorio,
+    R.link_ementa,
+    R.referencia,
+    R.nome_completo AS Nome_Repositorio,
 	MA.identidade , 
 	MA.nacionalidade ,
 	MA.pais_de_residencia ,
@@ -148,6 +192,10 @@ LEFT JOIN
 	especialista_produz_material EPM ON EPM.material_id = M.material_id
 LEFT JOIN
 	especialista E ON E.membro_academico_id = EPM.membro_academico_id
+LEFT JOIN
+    colaboracao_repositorio CR ON EPM.membro_academico_id = CR.orientacao_id
+LEFT JOIN
+    repositorio R ON R.codigo_rep = CR.codigo_rep
 LEFT JOIN 
     membro_academico MA ON MA.id = E.membro_academico_id
 LEFT JOIN 
@@ -176,5 +224,9 @@ WHERE E.DispoOriEsp = True;
 -- VALUES (10, 'cod', 16, 'Tema legal', true, 'Espanhol', 'Espanhol para niños');
 -- INSERT INTO material(material_id, endereco_link, id_componente_curricular, estado, material_anterior_id, especialista_id)
 -- VALUES(1, 'link', 10, 'ativo', NULL, 1);
+-- INSERT INTO repositorio(codigo_rep, link_ementa, data_fim, referencia, nome_completo)
+-- VALUES(1, 'link_ementa', '2024-02-10', 'refere', 'Repositorio Legal')
+-- INSERT INTO colaboracao_repositorio(id, orientacao_id, orientado_id, codigo_rep)
+-- VALUES (1, 1, 2, 1)
 
--- SELECT * FROM vMaterial WHERE especialista_id = 1;
+-- SELECT * FROM vMaterial WHERE orientado_id = 2;
