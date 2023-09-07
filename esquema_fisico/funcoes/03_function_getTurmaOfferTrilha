@@ -1,11 +1,122 @@
+/*
+Sobre o artefato:
+
+O artefato getTurmaOfferTrilha é uma function que recupera view de turmas ofertadas associadas ao aluno de especialização e à trilha escolhida. O input é a chave primária do aluno especialização. O retorno é o select da view, onde retorna somente as turmas da trilha escolhida que possuem relação com o aluno recebido pelo parâmetro. Assim, para cada turma de especialização relacionada com aluno, vamos juntar os dados dela com as informações do componente curricular e da trilha escolhida / trilha ofertada.
+*/
+
+/*
+-- Scripts necessários para conseguir criar a function getTurmaOfferTrilha:
+
+CREATE TABLE IF NOT EXISTS membro_academico(
+    id SERIAL NOT NULL,
+    identidade VARCHAR(20) NOT NULL, 
+    nacionalidade varchar(20) NOT NULL,
+    pais_de_residencia varchar(19) NOT NULL,
+    nome_completo varchar(70) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    nome_da_mae varchar(70),
+    genero varchar(20),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS aluno_professor_isf (
+    membro_academico_id INTEGER,
+    RA VARCHAR(15) NOT NULL,
+    PRIMARY KEY (membro_academico_id)
+);
+
+ALTER TABLE aluno_professor_isf
+    ADD CONSTRAINT FK_membro_academico FOREIGN KEY (membro_academico_id) REFERENCES membro_academico(id);
+	
+CREATE TABLE IF NOT EXISTS aluno_especializacao(
+    aluno_professor_isf_id INTEGER NOT NULL, 
+    DataIngresso DATE NOT NULL,
+    DataConclusao DATE,
+    DiplomaFile VARCHAR(200),
+    Titulacao VARCHAR(200),
+    RegistroMinistrante VARCHAR(200),
+    PRIMARY KEY (aluno_professor_isf_id)
+);
+
+ALTER TABLE aluno_especializacao
+        ADD CONSTRAINT FK_aluno_prof_id
+            FOREIGN KEY (aluno_professor_isf_id)
+            REFERENCES aluno_professor_isf(membro_academico_id); 
+			
+CREATE TABLE IF NOT EXISTS componente_curricular (
+    id_componente_curricular SERIAL NOT NULL,
+    codigo varchar(10),
+    carga_horaria integer NOT NULL,
+    Eixo_tematico varchar(30),
+    Obrigatoriedade bool,
+    Tipo_disciplina varchar(30),
+    Nome_completo varchar(50),
+    PRIMARY KEY(id_componente_curricular)
+);
+
+CREATE TABLE if NOT EXISTS trilha_ofertada(
+    id SERIAL,
+    carga_horaria INTEGER,
+    idioma VARCHAR(20) NOT NULL,
+    link_ementa VARCHAR(200),
+    horas_teoricas INTEGER,
+    horas_praticas INTEGER,
+    PRIMARY KEY (id)
+);
+
+-- trilha escolhida
+
+CREATE TABLE if NOT EXISTS trilha_escolhida(
+    id SERIAL,
+    trilha_ofertada_id INTEGER NOT NULL,
+    componente_curricular_id INTEGER NOT NULL,
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE trilha_escolhida
+    ADD CONSTRAINT FK_trilha_ofertada_id
+        FOREIGN KEY (trilha_ofertada_id)
+        REFERENCES trilha_ofertada(id);
+
+ALTER TABLE trilha_escolhida
+    ADD CONSTRAINT FK_componente_curricular_id
+        FOREIGN KEY (componente_curricular_id)
+        REFERENCES componente_curricular(id_componente_curricular);
+
+CREATE TABLE IF NOT EXISTS turma_especializacao( 
+	id SERIAL NOT NULL,
+	Data_Fim DATE,
+	Data_Inicio DATE NOT NULL,
+	trilha_escolhida_id INT,
+	PRIMARY KEY(id)
+);
+
+ALTER TABLE turma_especializacao ADD CONSTRAINT FK_trilha_escolhida 
+FOREIGN KEY (trilha_escolhida_id) REFERENCES trilha_escolhida(id);
+
+CREATE TABLE IF NOT EXISTS aluno_esp_cursa_turma_esp (
+    id SERIAL PRIMARY KEY,
+    status_inscricao status_inscricao_enum NOT NULL,
+    nota_final DECIMAL,
+    aluno_professor_isf_id INT,
+    turma_especializacao_id INT
+);
+
+ALTER TABLE aluno_esp_cursa_turma_esp
+    ADD CONSTRAINT FK_turma_esp FOREIGN KEY (turma_especializacao_id) REFERENCES turma_especializacao(id);
+    
+ALTER TABLE aluno_esp_cursa_turma_esp
+    ADD CONSTRAINT FK_aluno_esp FOREIGN KEY (aluno_professor_isf_id) REFERENCES aluno_especializacao(aluno_professor_isf_id);
+*/
+
 CREATE OR REPLACE FUNCTION getTurmaOfferTrilha(
-    chave_aluno_esp text,
+    chave_aluno_esp int
 )
 RETURNS TABLE (
     Turma character varying(70),
     DataInicio date,
     DataFinal date, 
-    Horario character varying(70) 
+    CargaHoraria INT 
 ) AS
 $$
 BEGIN
@@ -13,9 +124,9 @@ BEGIN
     SELECT 
 		cc.nome_completo as Turma,
 		te.data_inicio as DataInicio,
-		te.data_final as DataFinal,
-		trilha_of.carga_horaria as Horario
- 	FROM aluno_especializacao ae--Utiliza a view vOrientados para retornar a table
+		te.data_fim as DataFinal,
+		trilha_of.carga_horaria as CargaHoraria
+ 	FROM aluno_especializacao ae
     LEFT JOIN
 		aluno_esp_cursa_turma_esp alunoCursa ON ae.aluno_professor_isf_id = alunoCursa.aluno_professor_isf_id
 	LEFT JOIN
@@ -31,3 +142,5 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+select * from getTurmaOfferTrilha(1); 
