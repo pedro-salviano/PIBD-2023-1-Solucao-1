@@ -10,7 +10,7 @@ RETURNS TABLE (
     tipo VARCHAR(20),
     email VARCHAR(70)
 )
-AS $$
+AS $func$
 BEGIN
     RETURN QUERY
         SELECT
