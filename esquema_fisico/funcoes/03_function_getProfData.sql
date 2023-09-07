@@ -1,31 +1,36 @@
-CREATE OR REPLACE FUNCTION GetProfData()
+CREATE OR REPLACE FUNCTION getProfData(professor_id INT)
 RETURNS TABLE (
     aluno_professor_id INTEGER,
-    nome_completo VARCHAR,
-    pais_de_residencia VARCHAR,
+    nome_completo VARCHAR(70),
+    pais_de_residencia VARCHAR(20),
     data_nascimento DATE,
     codigo_pais_telefone INTEGER,
     codigo_area_telefone INTEGER,
-    numero_telefone VARCHAR,
-    tipo VARCHAR,
-    email VARCHAR
+    numero_telefone VARCHAR(20),
+    tipo VARCHAR(20),
+    email VARCHAR(70)
 )
 AS $$
 BEGIN
     RETURN QUERY
         SELECT
-            prof_isf.membro_academico_id AS aluno_professor_id,
-            ma.nome_completo,
-            ma.pais_de_residencia,
-            ma.data_nascimento,
-            ma_telefone.ddi AS codigo_pais_telefone,
-            ma_telefone.ddd AS codigo_area_telefone,
-            ma_telefone.numero AS numero_telefone,
-            ma_email.tipo AS tipo,
-            ma_email.valor AS email
-        FROM aluno_professor_isf prof_isf
-        JOIN membro_academico ma ON prof_isf.membro_academico_id = ma.id
-        LEFT JOIN membro_academico_telefone ma_telefone ON ma.id = ma_telefone.membro_academico_id
-        LEFT JOIN membro_academico_email ma_email ON ma.id = ma_email.membro_academico_id;
+            v.aluno_professor_id,
+            v.nome_completo,
+            v.pais_de_residencia,
+            v.data_nascimento,
+            v.codigo_pais_telefone,
+            v.codigo_area_telefone,
+            v.numero_telefone,
+            v.tipo,
+            v.email
+        FROM 
+            vProfData v
+        WHERE
+            v.aluno_professor_id = professor_id
+ );
+EXCEPTION
+    WHEN others THEN
+        RAISE EXCEPTION 'Erro ao obter as informações';
 END;
-$$ LANGUAGE plpgsql;
+$func$
+LANGUAGE plpgsql;
