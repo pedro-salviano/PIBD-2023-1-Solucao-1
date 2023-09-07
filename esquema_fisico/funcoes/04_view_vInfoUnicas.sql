@@ -1,14 +1,15 @@
 CREATE OR REPLACE VIEW vInfoUnicas AS
 SELECT
-  ma.nome_completo,
-  ma.nacionalidade,
-  ma.identidade,
-  ma.nome_da_mae,
-  ma.data_nascimento,
-  ma.genero,
-  ma.pais_de_residencia,
-  ae.DataIngresso,
-  ae.DataConclusao
+	ma.nome_completo,
+	ma.nacionalidade,
+	ma.identidade,
+	ma.nome_da_mae,
+	ma.data_nascimento,
+	ma.genero,
+	ma.pais_de_residencia,
+	ma.id,
+	ae.DataIngresso,
+	ae.DataConclusao
 FROM
 	membro_academico ma
 JOIN
