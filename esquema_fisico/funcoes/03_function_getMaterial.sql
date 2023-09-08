@@ -1,27 +1,24 @@
 CREATE OR REPLACE FUNCTION getMaterial(orientado_id INT)
 RETURNS TABLE (
-    material_id INT,
-    endereco_link VARCHAR(100),
-    id_componente_curricular INT,
-    estado VARCHAR(20),
-    material_anterior_id INT
+    codigo_rep INT,
+    link_ementa VARCHAR(200),
+    data_fim DATE,
+    referencia VARCHAR(200),
+    nome_completo VARCHAR(200)
 ) AS $$
 BEGIN
     RETURN QUERY
     SELECT
-        m.material_id,
-        m.endereco_link,
-        m.id_componente_curricular,
-        m.estado,
-        m.material_anterior_id
+        r.codigo_rep,
+        r.link_ementa,
+        r.data_fim,
+        r.referencia,
+        r.nome_completo
     FROM
-        material m
-    JOIN
-        especialista_produz_material epm
-    ON
-        m.material_id = epm.material_id
+        colaboracao_repositorio cr
+    INNER JOIN
+        repositorio r ON cr.codigo_rep = r.codigo_rep
     WHERE
-        epm.membro_academico_id = orientado_id;
-
+        cr.orientado_id = orientado_id;
 END;
 $$ LANGUAGE plpgsql;
